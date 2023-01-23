@@ -1,67 +1,58 @@
-// sketch.js - purpose and description here
-// Author: Your Name
-// Date:
+/* 
 
-// Here is how you might set up an OOP p5.js project
-// Note that p5.js looks for a file called sketch.js
+- sketch.js - 
+== Author: Xingwei Christopher Zhang ==
+== Date: Jan.22, 2023 ==
 
-// Constants - User-servicable parts
-// In a longer project I like to put these in a separate file
-const VALUE1 = 1;
-const VALUE2 = 2;
+*/
 
-// Globals
-let myInstance;
-let canvasContainer;
+var points = [];  // create an array to save elements
+var v_Angle = 0.00255;  // velocity of angle change, change this to get different lines.
 
-class MyClass {
-    constructor(param1, param2) {
-        this.property1 = param1;
-        this.property2 = param2;
+function setup() 
+{
+    createCanvas(windowWidth,windowHeight);  // window's size.
+    background(20);  // dark color
+    noiseDetail(1);
+    angleMode(degrees);
+
+    var density = 75;  // the density var for space between each element
+    var space = width / density;  // the larger the density, the smaller the space.
+
+    // classic double-loop to create basic 2D lattice
+    for (var x = 0; x < width; x += space)
+    {
+        for (var y = 0; y < height; y += space)
+        {
+            var point = createVector(x,y);
+            points.push(point);
+        }
     }
+}
 
-    myMethod() {
-        // code to run when method is called
+function draw(){
+    noStroke()
+    fill(255)  // white
+
+    for (var i = 0; i < points.length; i++)
+    {
+        if (dist(width/2, height/2, points[i].x, points[i].y) < 350)
+        {
+            // (based on point coordinates in points[]) create ellipse for each point
+            ellipse(points[i].x, points[i].y, 2, 2);  
+        }
+        
+
+        // set angles to generate
+        var angleTo = map(noise(points[i].x * v_Angle, points[i].y * v_Angle), 0, 1, 1, 150);  
+
+        // add createVector to every point
+        points[i].add(createVector(cos(angleTo), sin(angleTo)));
+
+        var colorR = map(points[i].y, 0, height, 0, 300);
+        var colorG = map(points[i].x, 0, width, 0, 300);
+        var colorB = map(points[i].y, 0, height, 0, 300);
+
+        fill(colorR, colorG, colorB);
     }
-}
-
-// setup() function is called once when the program starts
-function setup() {
-    // place our canvas, making it fit our container
-    canvasContainer = $("#canvas-container");
-    let canvas = createCanvas(canvasContainer.width(), canvasContainer.height());
-    canvas.parent("canvas-container");
-    // resize canvas is the page is resized
-    $(window).resize(function() {
-        console.log("Resizing...");
-        resizeCanvas(canvasContainer.width(), canvasContainer.height());
-    });
-    // create an instance of the class
-    myInstance = new MyClass(VALUE1, VALUE2);
-
-    var centerHorz = windowWidth / 2;
-    var centerVert = windowHeight / 2;
-}
-
-// draw() function is called repeatedly, it's the main animation loop
-function draw() {
-    background(220);    
-    // call a method on the instance
-    myInstance.myMethod();
-
-    // Put drawings here
-    var centerHorz = canvasContainer.width() / 2 - 125;
-    var centerVert = canvasContainer.height() / 2 - 125;
-    fill(234, 31, 81);
-    noStroke();
-    rect(centerHorz, centerVert, 250, 250);
-    fill(255);
-    textStyle(BOLD);
-    textSize(140);
-    text("p5*", centerHorz + 10, centerVert + 200);
-}
-
-// mousePressed() function is called once after every time a mouse button is pressed
-function mousePressed() {
-    // code to run when mouse is pressed
 }
