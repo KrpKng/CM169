@@ -17,10 +17,11 @@ var c_g2;
 var c_b1;
 var c_b2;
 
+
 function setup() 
 {
     createCanvas(windowWidth,windowHeight);  // window's size.
-    background(10);  // dark background
+    background(random(0, 31));  // dark background
 
     angleMode(degrees);
     noiseDetail(1.5);  // adjust this to create different line appearance.
@@ -51,9 +52,11 @@ function draw()
     if (mouseIsPressed)
     {
         noStroke()
+
         for (var i = 0; i < points.length; i++)
         {
-            if (dist(width/2, height/2, points[i].x, points[i].y) < 350)
+            // give it a range
+            if (dist(width/2, height/2, points[i].x, points[i].y) < 550)
             {
                 // (based on point coordinates in points[]) create square (or any, e.g. ellipse)
                 square(points[i].x, points[i].y, 1.5);  
@@ -74,10 +77,32 @@ function draw()
             fill(colorR, colorG, colorB, alpha);
         }
     }
+    
+    if(keyIsPressed)
+    {
+        if (key == 'r')
+        {
+            // center = center of the canvas
+            line(width/2, height/2, mouseX, mouseY);
+            stroke('rgba(255, 0, 0, 0.15)');
+        } 
+        if (key == 'g')
+        {
+            line(width/2, height/2, mouseX, mouseY);
+            stroke('rgba( 0, 255,0, 0.15)');
+        }
+        if (key == 'b')
+        {
+            line(width/2, height/2, mouseX, mouseY);
+            stroke('rgba(0, 0, 255, 0.15)');
+        }
+    }
 
-    if (keyIsDown(DOWN_ARROW))
+    if (keyIsDown(67))
     {
         clear();
-        setup();
+        setup();  
+        // BUT...Unless your computer is powerful enough, 
+        // it will get very stuck after you reset it multiple times (or even once).
     }
 }
