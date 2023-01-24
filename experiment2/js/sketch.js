@@ -5,9 +5,12 @@
 == Date: Jan.23, 2023 ==
 
 - README -
-1. press mouse left button to generate random noise image.
-2. press r, g, or b on the keyboard and move your mouse simultaneously to generate lines.
-3. click c on the keyboard to clear the canvas, the background color will randomly change, though all of them should be 'relatively dark'.
+1. Press mouse left button to generate random noise image.
+2. Press r, g, or b on the keyboard and move your mouse simultaneously to generate lines.
+3. Click c on the keyboard to clear the canvas, the background color will randomly change, though all of them should be 'relatively dark'.
+
+** will get very stuck after 'clear' multiple times **
+** refresh the page if you think it is necessary **
 
 
 */
