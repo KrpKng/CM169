@@ -43,8 +43,8 @@ function setup()
     angleMode();  
     noiseDetail(1.5);  // adjust this to create different line appearance.
 
-    var density = 75;  // the density var for space between each element
-    var interval = width / density;  // the larger the density, the smaller the space.
+    var d_l = 75;  // the density var for space between each element
+    var interval = width / d_l;  // the larger the density, the smaller the space.
 
     c_r1 = random(255);
     c_r2 = random(255);
