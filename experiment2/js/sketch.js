@@ -6,8 +6,14 @@
 
 - README -
 1. Press mouse left button to generate random noise image.
+
 2. Press r, g, or b on the keyboard and move your mouse simultaneously to generate lines.
-3. Click c on the keyboard to clear the canvas, the background color will randomly change, though all of them should be 'relatively dark'.
+
+3. Press d on the keyboard and press mouse left button simultaneously to generate perlin noise with 'DEGREES Angle Mode'.
+  - The Default mode is RADIANS.
+  - Press s on the keyboard and press mouse left button simultaneously to change back to RADIANS mode.
+
+4. Click c on the keyboard to clear the canvas, the background color will randomly change, though all of them should be 'relatively dark'.
 
 ** will get very stuck after 'clear' multiple times **
 ** refresh the page if you think it is necessary **
@@ -34,7 +40,7 @@ function setup()
     createCanvas(windowWidth,windowHeight);  // window's size.
     background(random(0, 31));  // dark background
 
-    angleMode(degrees);
+    angleMode();  
     noiseDetail(1.5);  // adjust this to create different line appearance.
 
     var density = 75;  // the density var for space between each element
@@ -93,17 +99,29 @@ function draw()
     // draw lines
     if(keyIsPressed)
     {
+        if (key == 'd')
+        {
+            angleMode(DEGREES);
+        }
+      
+        if (key == 's')
+        {
+            angleMode(RADIANS);
+        }
+      
         if (key == 'r')
         {
             // center = center of the canvas
             line(width/2, height/2, mouseX, mouseY);
             stroke('rgba(255, 0, 0, 0.1)');
         } 
+      
         if (key == 'g')
         {
             line(width/2, height/2, mouseX, mouseY);
             stroke('rgba( 0, 255,0, 0.1)');
         }
+      
         if (key == 'b')
         {
             line(width/2, height/2, mouseX, mouseY);
