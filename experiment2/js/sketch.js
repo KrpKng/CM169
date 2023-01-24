@@ -108,7 +108,7 @@ function draw()
         {
             angleMode(RADIANS);
         }
-      
+        // draw lines
         if (key == 'r')
         {
             // center = center of the canvas
