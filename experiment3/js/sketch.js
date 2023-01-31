@@ -2,6 +2,13 @@
 // Author: Xingwei Christopher Zhang
 // Date: Due Jan.31, 2023
 
+/* 
+--README--
+1. Press the mouse button to generate “planets”.
+
+2. Move your mouse when pressing the mouse button to see the color changes of the “planets”.
+*/
+
 
 let angle1 = 0;
 let angle2 = 0;
@@ -23,11 +30,13 @@ function setup() {
 
 function draw() {
     background(0, 120, 120);
+  
+    let randomN = random(3,4);
 
     rotateY(frameCount * 0.0075);
     rotateX(frameCount * 0.0075);
     rotateZ(frameCount * 0.0075);
-    let randomN = random(3,4);
+    
 
     // Small swirl
     for (let i = 0; i <= 360; i += 45) {
