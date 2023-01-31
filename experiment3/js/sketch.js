@@ -1,12 +1,7 @@
-// sketch.js - purpose and description here
-// Author: Your Name
-// Date:
+// sketch.js - Experiment 3: Generative Methods
+// Author: Xingwei Christopher Zhang
+// Date: Due Jan.31, 2023
 
-// Here is how you might set up an OOP p5.js project
-// Note that p5.js looks for a file called sketch.js
-
-// Constants - User-servicable parts
-// In a longer project I like to put these in a separate file
 
 let angle1 = 0;
 let angle2 = 0;
@@ -82,18 +77,22 @@ function draw() {
     angle1 -= randomN;
     angle2 += randomN;
 
+    // generate when pressing
     if (mouseIsPressed === true){
 
+        // light for elements
         let dirX_Elight = (mouseX / width) * 3;
         let dirY_Elight = (mouseY / height) * 3;
 
-        directionalLight(80, 200, 255, -dirX_Elight, -dirY_Elight, -1);
+        // give light
+        directionalLight(0, 0, 255, -dirX_Elight, -dirY_Elight, -1);
 
+        // the frequency of appearing
         if (random(100) > 99){
             for(let i = 0; i < 100; i++){
-                let cR = random(255);
-                let cG = random(255);
-                let cB = random(255);
+                let cR = map(mouseX, 0, width, 0, random(255));
+                let cG = map(mouseY, 0, height, random(255), 0);
+                let cB = map(mouseX, 0, width, 50, 255);
 
                 let eleColor = color(cR,cG,cB);
 
@@ -102,6 +101,7 @@ function draw() {
             }
         }
 
+        // call appear
         for(let i = starsL.length - 1; i>=0; i--){
             starsL[i].addVel();
             starsL[i].showEle();
@@ -117,10 +117,12 @@ class Star {
         this.vel = p5.Vector.random3D().normalize().mult(random(5,6));
         this.eleColor = eleColor;
     }
+
     // add velocity to the element position
     addVel(){
         this.pos.add(this.vel)
     }
+
     // show the created element
     showEle(){
         push();
